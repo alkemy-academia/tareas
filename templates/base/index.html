@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Portada Principal</title></head>
+    <body>
+        <main style="margin: 50px;">
+            {% if user.is_authenticated%}
+                <nav style="background-color: lightblue;">
+                    <div style="float: left;">
+                        <a href="">Listar Tareas</a>
+                    </div>
+                    <div style="float: right;">
+                        Usuario: {{ user.username }}
+                        <a href="">Cerrar sesión</a>
+                    </div>
+                </nav>
+            <br>
+            {% endif %}
+            <h1>Portada Principal - Sistema de Gestión de Tareas</h1>
+            <hr>
+            <p>El presente sistema tiene por objetivo gestionar Tareas que realizan distintos usuarios</p>
+            <hr>
+            <br>
+            <a href="{% url 'usuario:login' %}">Ingresar al Sistema</a>
+        </main>
+    </body>
+</html>
