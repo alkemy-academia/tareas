@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Detalle de Tarea</title></head>
+    <body>
+        <main style="margin: 50px;">
+            <h1>Detalle de Tarea</h1>
+            <br>
+            <p>Titulo: {{ tarea.titulo }}</p>
+            <p>Descripciopn: {{ tarea.descripcion }}</p>
+            <p>Está Completada?: {{ tarea.completada }}</p>
+            <p>Asignada a: {{ tarea.asignada_a }}</p>
+            <hr>
+            <a href="{% url 'tarea:modificar_tarea' tarea.id %}">Modificar</a> |
+            <a href="{% url 'tarea:eliminar_tarea' tarea.id %}">Eliminar</a> |
+            <a href="{% url 'tarea:lista_tareas' %}">Volver a Lista de Tareas</a>
+        </main>
+    </body>
+</html>

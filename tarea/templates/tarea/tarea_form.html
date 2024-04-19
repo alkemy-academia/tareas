@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Creacion/Modificacion de Tarea</title></head>
+    <body>
+        <main style="margin: 50px;">
+            <h1>Creacion/Modificacion de Tarea</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <label>Titulo: </label>
+                <input type="text" name="titulo" value="{% if tarea %} {{tarea.titulo}} {% endif %}">
+                <br><br>
+                <label>Descripcion: </label>
+                <textarea name="descripcion">{% if tarea %} {{tarea.descripcion}} {% endif %}</textarea>
+                <br><br>
+                <input type="submit" value="Guardar">
+            </form>
+            <br>
+            <hr>
+            <a href="{% url 'tarea:lista_tareas' %}">Volver a Lista de Tareas</a>
+        </main>
+    </body>
+</html>
