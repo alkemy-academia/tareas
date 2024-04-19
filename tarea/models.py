@@ -1,7 +1,5 @@
 from django.db import models
 
-from usuario.models import Usuario
-
 
 class Tarea(models.Model):
     titulo = models.CharField(max_length=200)

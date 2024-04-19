@@ -5,10 +5,10 @@
         <main style="margin: 50px;">
             <h1>Detalle de Tarea</h1>
             <br>
-            <p>Titulo: {{ tarea.titulo }}</p>
-            <p>Descripciopn: {{ tarea.descripcion }}</p>
-            <p>Está Completada?: {{ tarea.completada }}</p>
-            <p>Asignada a: {{ tarea.asignada_a }}</p>
+            <p><strong>Titulo:</strong> {{ tarea.titulo }}</p>
+            <p><strong>Descripciopn:</strong> {{ tarea.descripcion }}</p>
+            <p><strong>Está Completada?:</strong> {{ tarea.completado|yesno:"SI, NO" }}</p>
+            <p><strong>Asignada a:</strong> {{ tarea.asignada_a|default_if_none:"Ningun usuario" }}</p>
             <hr>
             <a href="{% url 'tarea:modificar_tarea' tarea.id %}">Modificar</a> |
             <a href="{% url 'tarea:eliminar_tarea' tarea.id %}">Eliminar</a> |

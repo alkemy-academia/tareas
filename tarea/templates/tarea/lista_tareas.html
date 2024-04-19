@@ -5,13 +5,14 @@
         <main style="margin: 50px;">
             <h1>Lista de Tareas</h1>
             <br>
-            <ul>
+            <ol>
                 {% for tarea in tareas %}
                     <li><a href="{% url 'tarea:detalle_tarea' tarea.id %}">{{ tarea.titulo }}</a></li>
                 {% empty %}
                     <li>No existen Tareas</li>
                 {% endfor %}
-            </ul>
+            </ol>
+            <hr>
             <br>
             <a href="{% url 'tarea:crear_tarea' %}">Crear Nueva Tarea</a>
         </main>
