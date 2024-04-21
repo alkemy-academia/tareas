@@ -18,5 +18,5 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request, 'usuario/login.html', {"msj": "Deslogueado" })
+    return redirect(reverse('index'))
 

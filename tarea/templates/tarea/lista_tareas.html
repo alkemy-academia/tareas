@@ -14,7 +14,10 @@
             </ol>
             <hr>
             <br>
-            <a href="{% url 'tarea:crear_tarea' %}">Crear Nueva Tarea</a>
+            <a href="{% url 'index' %}">Home </a>
+            {% if user.is_authenticated%}
+               | <a href="{% url 'tarea:crear_tarea' %}">Crear Nueva Tarea</a>
+            {% endif %}
         </main>
     </body>
 </html>

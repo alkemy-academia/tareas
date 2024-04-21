@@ -12,6 +12,9 @@
                 <label>Descripcion: </label>
                 <textarea name="descripcion">{% if tarea %} {{tarea.descripcion}} {% endif %}</textarea>
                 <br><br>
+                <label>Completada: </label>
+                <input type="checkbox" name="completado" {% if tarea and tarea.completado %} checked {% endif %}>
+                <br><br>
                 <input type="submit" value="Guardar">
             </form>
             <br>

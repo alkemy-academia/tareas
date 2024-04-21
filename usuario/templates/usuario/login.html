@@ -10,7 +10,13 @@
                 <input type="password" name="password" placeholder="Password">
                 <input type="submit" value="Login">
             </form>
+
+            {% if msj %}
+                <br>
+                <p style="background-color: #fa847f; padding:10px;">{{ msj }}</p>
+            {% endif %}
             <hr>
+            <a href="{% url 'index' %}">Home </a>
         </main>
     </body>
 </html>
