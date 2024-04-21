@@ -10,8 +10,10 @@
             <p><strong>Está Completada?:</strong> {{ tarea.completado|yesno:"SI, NO" }}</p>
             <p><strong>Asignada a:</strong> {{ tarea.asignada_a|default_if_none:"Ningun usuario" }}</p>
             <hr>
-            {% if user.is_authenticated %}
+            {% if perms.tarea.change_tarea %}
                 <a href="{% url 'tarea:modificar_tarea' tarea.id %}">Modificar</a> |
+            {% endif %}
+            {% if perms.tarea.delete_tarea %}
                 <a href="{% url 'tarea:eliminar_tarea' tarea.id %}">Eliminar</a> |
             {% endif %}
             <a href="{% url 'tarea:lista_tareas' %}">Volver a Lista de Tareas</a>

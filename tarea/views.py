@@ -44,7 +44,7 @@ def modificar_tarea(request, pk):
     return render(request, 'tarea/tarea_form.html', {'tarea': tarea})
 
 @login_required
-@permission_required('tarea.delete_tarea' , raise_exception=True)
+@permission_required('tarea.delete_tarea', raise_exception=True)
 def eliminar_tarea(request, pk):
     tarea = get_object_or_404(Tarea, pk=pk)
     if request.method == 'POST':
