@@ -4,15 +4,18 @@ from django.urls import reverse
 
 from tarea.models import Tarea
 
+
 @login_required
 def lista_tareas(request):
     tareas = Tarea.objects.all()
     return render(request, 'tarea/lista_tareas.html', {'tareas': tareas})
 
+
 @login_required
 def detalle_tarea(request, pk):
     tarea = get_object_or_404(Tarea, pk=pk)
     return render(request, 'tarea/detalle_tarea.html', {'tarea': tarea})
+
 
 @permission_required('tarea.add_tarea', raise_exception=True)
 def crear_tarea(request):
@@ -25,6 +28,7 @@ def crear_tarea(request):
         return redirect(reverse('tarea:lista_tareas'))
 
     return render(request, 'tarea/tarea_form.html')
+
 
 @login_required
 @permission_required('tarea.change_tarea', raise_exception=True)
@@ -42,6 +46,7 @@ def modificar_tarea(request, pk):
         return redirect(reverse('tarea:lista_tareas'))
 
     return render(request, 'tarea/tarea_form.html', {'tarea': tarea})
+
 
 @login_required
 @permission_required('tarea.delete_tarea', raise_exception=True)
