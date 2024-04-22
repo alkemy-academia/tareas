@@ -19,7 +19,7 @@ def crear_tarea(request):
     if request.method == 'POST':
         titulo = request.POST.get('titulo')
         descripcion = request.POST.get('descripcion')
-        completado = request.POST.get('completado')
+        completado = True if request.POST.get('completado') == 'on' else False
         Tarea.objects.create(titulo=titulo, descripcion=descripcion, completado=completado)
 
         return redirect(reverse('tarea:lista_tareas'))
