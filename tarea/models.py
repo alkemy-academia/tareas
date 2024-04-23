@@ -7,7 +7,7 @@ class Tarea(models.Model):
     completado = models.BooleanField(default=False)
     creado = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
-    asignada_a = models.ForeignKey('usuario.Usuario', on_delete=models.PROTECT, null=True)
+    asignada_a = models.ForeignKey('usuario.Usuario', on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
         return self.titulo

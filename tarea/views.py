@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
+from tarea.forms import TareaForm
 from tarea.models import Tarea
 
 
@@ -19,15 +21,20 @@ def detalle_tarea(request, pk):
 
 @permission_required('tarea.add_tarea', raise_exception=True)
 def crear_tarea(request):
+    nueva_tarea = None
     if request.method == 'POST':
-        titulo = request.POST.get('titulo')
-        descripcion = request.POST.get('descripcion')
-        completado = True if request.POST.get('completado') == 'on' else False
-        Tarea.objects.create(titulo=titulo, descripcion=descripcion, completado=completado)
+        tarea_form = TareaForm(request.POST)
+        if tarea_form.is_valid():
+            # Se guardan los datos que provienen del formulario en la B.D.
+            nueva_tarea = tarea_form.save(commit=True)
+            messages.success(request,
+                             'Se ha agregado correctamente la Tarea {}'.format(nueva_tarea))
+            return redirect(reverse('tarea:detalle_tarea', args={nueva_tarea.id}))
+    else:
+        tarea_form = TareaForm()
 
-        return redirect(reverse('tarea:lista_tareas'))
-
-    return render(request, 'tarea/tarea_form.html')
+    return render(request, 'tarea/tarea_form.html',
+                  {'form': tarea_form})
 
 
 @login_required
@@ -35,17 +42,15 @@ def crear_tarea(request):
 def modificar_tarea(request, pk):
     tarea = get_object_or_404(Tarea, pk=pk)
     if request.method == 'POST':
-        titulo = request.POST.get('titulo')
-        descripcion = request.POST.get('descripcion')
-        completado = True if request.POST.get('completado') == 'on' else False
-        tarea.titulo = titulo
-        tarea.descripcion = descripcion
-        tarea.completado = completado
-        tarea.save()
+        form_tarea = TareaForm(request.POST, instance=tarea)
+        if form_tarea.is_valid():
+            form_tarea.save()
+            messages.success(request, 'Se ha actualizado correctamente la Tarea')
+            return redirect(reverse('tarea:detalle_tarea', args=[tarea.id]))
+    else:
+        form_tarea = TareaForm(instance=tarea)
 
-        return redirect(reverse('tarea:lista_tareas'))
-
-    return render(request, 'tarea/tarea_form.html', {'tarea': tarea})
+    return render(request, 'tarea/tarea_form.html', {'form': form_tarea})
 
 
 @login_required

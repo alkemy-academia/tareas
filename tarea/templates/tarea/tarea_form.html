@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <head><title>Creacion/Modificacion de Tarea</title></head>
+    <head>
+        <title>Creacion/Modificacion de Tarea</title>
+        <style>
+            .errorlist {
+                color: red;
+            }
+        </style>
+    </head>
     <body>
         <main style="margin: 50px;">
             <h1>Creacion/Modificacion de Tarea</h1>
-            <form action="" method="post">
+            <form method="post">
+                {% for field in form %}
+                    <div class="campo">
+                        {{ field.errors }}
+                        {{ field.label_tag }}
+                        {{ field }}
+                    </div><br>
+                {% endfor %}
                 {% csrf_token %}
-                <label>Titulo: </label>
-                <input type="text" name="titulo" value="{% if tarea %} {{tarea.titulo}} {% endif %}">
-                <br><br>
-                <label>Descripcion: </label>
-                <textarea name="descripcion">{% if tarea %} {{tarea.descripcion}} {% endif %}</textarea>
-                <br><br>
-                <label>Completada: </label>
-                <input type="checkbox" name="completado" {% if tarea and tarea.completado %} checked {% endif %}>
-                <br><br>
                 <input type="submit" value="Guardar">
             </form>
             <br>
